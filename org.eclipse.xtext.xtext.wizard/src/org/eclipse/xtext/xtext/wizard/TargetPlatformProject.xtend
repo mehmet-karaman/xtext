@@ -99,7 +99,13 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.hamcrest" version="2.2.0"/>
 					<unit id="org.hamcrest.core" version="2.2.0.v20230809-1000"/>
 					<unit id="org.apache.commons.commons-logging" version="0.0.0"/>
-					«IF config.junitVersion == JUnitVersion.JUNIT_5»
+					<unit id="org.objectweb.asm" version="9.7.1"/>
+					<unit id="io.github.classgraph.classgraph" version="0.0.0"/>
+					<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-03"/>
+				</location>
+				«IF config.junitVersion == JUnitVersion.JUNIT_5»
+					<!-- workaround for Junit 5.12 Problems with Tycho 4.0.11 -->
+					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 						<unit id="org.apiguardian.api" version="0.0.0"/>
 						<unit id="junit-jupiter-api" version="0.0.0"/>
 						<unit id="junit-jupiter-engine" version="0.0.0"/>
@@ -112,11 +118,9 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="junit-platform-suite-commons" version="0.0.0"/>
 						<unit id="junit-vintage-engine" version="0.0.0"/>
 						<unit id="org.opentest4j" version="0.0.0"/>
-					«ENDIF»
-					<unit id="org.objectweb.asm" version="9.7.1"/>
-					<unit id="io.github.classgraph.classgraph" version="0.0.0"/>
-					<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-03"/>
-				</location>
+						<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-12"/>
+					</location>
+				«ENDIF»
 			</locations>
 		</target>
 	'''
