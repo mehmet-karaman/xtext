@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2025 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -101,13 +101,13 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         ExternalDependency.P2Coordinates _p2 = it.getP2();
         LinkedHashSet<String> _newLinkedHashSet = Sets.<String>newLinkedHashSet();
         final Procedure1<LinkedHashSet<String>> _function_2 = (LinkedHashSet<String> it_1) -> {
-          it_1.add("org.junit.jupiter.api;version=\"[5.1.0,6.0.0)\"");
-          it_1.add("org.junit.jupiter.api.extension;version=\"[5.1.0,6.0.0)\"");
+          it_1.add("org.junit.jupiter.api;version=\"[5.1.0,5.12.0)\"");
+          it_1.add("org.junit.jupiter.api.extension;version=\"[5.1.0,5.12.0)\"");
         };
         LinkedHashSet<String> _doubleArrow_1 = ObjectExtensions.<LinkedHashSet<String>>operator_doubleArrow(_newLinkedHashSet, _function_2);
         _p2.setPackages(_doubleArrow_1);
         ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-        _p2_1.setVersion("[5.1.0,6.0.0)");
+        _p2_1.setVersion("[5.1.0,5.12.0)");
         ExternalDependency.MavenCoordinates _maven = it.getMaven();
         _maven.setGroupId("org.junit.jupiter");
         ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();

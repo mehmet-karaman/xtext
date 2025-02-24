@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2025 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -61,10 +61,11 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		if (config.junitVersion == JUnitVersion.JUNIT_5) {
 			deps += new ExternalDependency()=>[
 				p2.packages = Sets.newLinkedHashSet => [
-					it += 'org.junit.jupiter.api;version="[5.1.0,6.0.0)"'
-					it += 'org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)"'
+					// workaround for problem with junit 5.12 and tycho 4.0.11
+					it += 'org.junit.jupiter.api;version="[5.1.0,5.12.0)"'
+					it += 'org.junit.jupiter.api.extension;version="[5.1.0,5.12.0)"'
 				]
-				p2.version = "[5.1.0,6.0.0)"
+				p2.version = "[5.1.0,5.12.0)"
 				maven.groupId = "org.junit.jupiter"
 				maven.artifactId = "junit-jupiter-api"
 				maven.scope = Scope.TESTCOMPILE
