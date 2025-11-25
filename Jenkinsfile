@@ -6,7 +6,7 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['r202403', 'r202406', 'r202409', 'r202412', 'r202503', 'r202506', 'r202509', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['r202403', 'r202406', 'r202409', 'r202412', 'r202503', 'r202506', 'r202509', 'r202512', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', choices: [ '17', '21' ], description: 'Which JDK version should be used?')
   }
