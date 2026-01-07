@@ -33,6 +33,7 @@ public class QuickfixCrossrefTestLanguageValidator extends AbstractQuickfixCross
 	public static final String MULTIFIXABLE_ISSUE = "multiFixableIssue";
 	public static final String MULTIFIXABLE_ISSUE_2 = "multiFixableIssue2";
 	public static final String BAD_NAME_IN_SUBELEMENTS = "badNameInSubelements";
+	public static final String WRONG_CHARS_ISSUE = "wrongCharsIssue";
 	public static final String FIXABLE = "fixable";
 	public static final String LOWERCASE = "lowercase";
 		
@@ -99,4 +100,13 @@ public class QuickfixCrossrefTestLanguageValidator extends AbstractQuickfixCross
 			warning(LOWERCASE, ele, QuickfixCrossrefPackage.Literals.ELEMENT__NAME, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, LOWERCASE);
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkNameWrongCharacters(Element ele) {
+		if (ele.getName().contains("oo")) {
+			warning(WRONG_CHARS_ISSUE, ele, QuickfixCrossrefPackage.Literals.ELEMENT__NAME, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, WRONG_CHARS_ISSUE);
+		}
+	}
+	
+
 }

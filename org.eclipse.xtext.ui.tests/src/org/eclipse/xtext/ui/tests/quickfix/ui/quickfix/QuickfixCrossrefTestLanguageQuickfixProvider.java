@@ -11,9 +11,12 @@ package org.eclipse.xtext.ui.tests.quickfix.ui.quickfix;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.ITextualMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
@@ -104,4 +107,14 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 			}
 		});
 	}
+	
+	@Fix(QuickfixCrossrefTestLanguageValidator.WRONG_CHARS_ISSUE)
+	public void wrongCharsFixable(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.acceptMulti(issue, "fix wrong chars", "fix wrong chars", null, (IMultiModification<Element>) (ctx) -> {
+			XtextResource eResource = (XtextResource) ctx.eResource();
+			String textToAdjust = eResource.getParseResult().getRootNode().getText().substring(issue.getOffset(), issue.getOffset() + issue.getLength());
+			eResource.update(issue.getOffset(), issue.getLength(), textToAdjust.replace("oo", "u"));
+		});
+	}
+
 }

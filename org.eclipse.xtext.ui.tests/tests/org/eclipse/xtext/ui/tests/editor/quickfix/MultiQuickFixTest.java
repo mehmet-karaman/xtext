@@ -103,4 +103,64 @@ public class MultiQuickFixTest extends AbstractMultiQuickfixTest {
 				"\"no doc\" Bor { }\n";
 		assertEquals(expectation.toString(), editor.getDocument().get());
 	}
+
+	@Test
+	public void testFixWrongChars() throws Exception {
+		String model = """
+				"Better documentation"
+				Bag { }
+				"Better documentation"
+				Beg { }
+				"Better documentation"
+				Big { }
+				"Better documentation"
+				Bug0 {
+					"Better documentation"
+					Boog {
+						Beg1 {
+						}
+					}
+				}
+				""";
+		IFile resource = dslFile(model);
+		IMarker[] markers = getMarkers(resource);
+		String contentAndMarkersBefore = """
+				"Better documentation"
+				Bag { }
+				"Better documentation"
+				Beg { }
+				"Better documentation"
+				Big { }
+				"Better documentation"
+				Bug0 {
+					"Better documentation"
+					<0<Boog>0> {
+						Beg1 {
+						}
+					}
+				}
+				-----
+				0: message=wrongCharsIssue""";
+		assertContentsAndMarkers(resource, markers, contentAndMarkersBefore);
+		applyQuickfixOnSingleMarkers(markers[0]);
+		String contentAndMarkersAfter = """
+				"Better documentation"
+				Bag { }
+				"Better documentation"
+				Beg { }
+				"Better documentation"
+				Big { }
+				"Better documentation"
+				Bug0 { "Better documentation"
+					Bug {
+						Beg1 {
+						}
+					} 
+				}
+				-----
+				(no markers found)
+				""";
+		assertContentsAndMarkers(resource, contentAndMarkersAfter);
+	}
+
 }
