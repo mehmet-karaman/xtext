@@ -16,6 +16,7 @@ import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
+import org.eclipse.xtext.util.Modules2;
 
 public class RuleEngineInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
@@ -40,7 +41,7 @@ public class RuleEngineInjectorProvider implements IInjectorProvider, IRegistryC
 		return new RuleEngineStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(createRuntimeModule());
+				return Guice.createInjector(Modules2.mixin(createRuntimeModule(), new RuleEngineTestServerModule()));
 			}
 		}.createInjectorAndDoEMFRegistration();
 	}
